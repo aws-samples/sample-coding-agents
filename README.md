@@ -2,7 +2,7 @@
 
 Agents that reason about programming tasks rather than just autocompleting code. A coding agent interprets your goal, gathers context, and performs multi-step changes.
 
-This sample is the **hands-on** counterpart to the blog post [Coding Agents: From Autocomplete to Autonomous Software Work](Coding%20Agents%20-%20From%20Autocomplete%20to%20Autonomous%20Software%20Work.md). This sample builds coding agents with the [Strands Agents SDK](https://strandsagents.com/) and is based off of the [AWS Prescriptive Guidance - Coding agents pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-patterns/coding-agents.html).
+This sample builds coding agents with the [Strands Agents SDK](https://strandsagents.com/) and is based off of the [AWS Prescriptive Guidance - Coding agents pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-patterns/coding-agents.html).
 
 ## Table of Contents
 
