@@ -51,7 +51,7 @@ def list_generated_scripts() -> str:
     test. Returns a newline-separated list of filenames, or a message
     explaining that the folder is empty.
     """
-    print(f"          list_generated_scripts()")
+    print("          list_generated_scripts()")
     if not GENERATED_DIR.exists():
         out = "(generated_code/ does not exist yet — the user needs to run code_generator.py first)"
     else:
@@ -101,7 +101,7 @@ def list_code_reviews() -> str:
     review by name. Returns a newline-separated list of review filenames,
     or a message explaining that the folder is empty.
     """
-    print(f"          list_code_reviews()")
+    print("          list_code_reviews()")
     if not REVIEWS_DIR.exists():
         out = "(code_reviews/ does not exist yet — the user needs to run code_reviewer.py first)"
     else:

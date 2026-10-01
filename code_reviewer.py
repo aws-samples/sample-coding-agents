@@ -51,7 +51,7 @@ def list_generated_scripts() -> str:
     look at. Returns a newline-separated list of filenames, or a message
     explaining that the folder is empty.
     """
-    print(f"          list_generated_scripts()")
+    print("          list_generated_scripts()")
     if not GENERATED_DIR.exists():
         out = "(generated_code/ does not exist yet — the user needs to run code_generator.py first)"
     else:

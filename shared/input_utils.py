@@ -38,7 +38,7 @@ def get_multiline_input(prompt: str) -> str:
         
         def redraw_from_cursor():
             """Redraw from cursor to end, then restore cursor position."""
-            save_pos = f'\x1b[s'
+            save_pos = '\x1b[s'
             clear_to_end = '\x1b[J'
             
             content = lines[row][col:]

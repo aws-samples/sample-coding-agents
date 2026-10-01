@@ -68,7 +68,7 @@ _SAFE_MD = re.compile(r"^[a-zA-Z][a-zA-Z0-9_]*\.md$")
 @tool
 def list_generated_scripts() -> str:
     """List the Python scripts available in the workspace's generated_code folder."""
-    print(f"          list_generated_scripts()")
+    print("          list_generated_scripts()")
     if not GENERATED_DIR.exists():
         out = "(generated_code/ does not exist yet — the user needs to run code_generator.py first)"
     else:
@@ -109,7 +109,7 @@ def read_generated_script(name: str) -> str:
 @tool
 def list_code_reviews() -> str:
     """List the saved review reports available in the workspace's code_reviews folder."""
-    print(f"          list_code_reviews()")
+    print("          list_code_reviews()")
     if not REVIEWS_DIR.exists():
         out = "(code_reviews/ does not exist yet — the user needs to run code_reviewer.py first)"
     else:
@@ -161,7 +161,7 @@ def read_code_review(name: str) -> str:
 @tool
 def list_refactored_scripts() -> str:
     """List the refactored scripts available in the workspace's refactored_code folder."""
-    print(f"          list_refactored_scripts()")
+    print("          list_refactored_scripts()")
     if not REFACTORED_DIR.exists():
         out = "(refactored_code/ does not exist yet — the user needs to run refactor_agent.py first)"
     else:
@@ -213,7 +213,7 @@ def read_refactored_script(name: str) -> str:
 @tool
 def list_generated_tests() -> str:
     """List the test files available in the workspace's generated_tests folder."""
-    print(f"          list_generated_tests()")
+    print("          list_generated_tests()")
     if not TESTS_DIR.exists():
         out = "(generated_tests/ does not exist yet — the user needs to run test_generator.py first)"
     else:

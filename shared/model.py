@@ -2,13 +2,15 @@ import functools
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+from dotenv import dotenv_values, load_dotenv
 from strands.models import BedrockModel
 
 # Load the repo-root .env (copied from .env.example) so AWS_PROFILE, AWS_REGION
 # and STRANDS_MODEL_* are set once for every lab. Variables already exported in
-# the shell win; the file only fills in what is missing.
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+# the shell win; the file only fills in what is missing. report_aws_target()
+# prints the result and warns when the shell overrode the file.
+ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(ENV_PATH)
 
 # Known-good active model. Used when auto mode is off or discovery fails.
 FALLBACK_MODEL_ID = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
@@ -39,6 +41,36 @@ def get_region() -> str:
         )
     except Exception:
         return os.environ.get("AWS_REGION", DEFAULT_REGION)
+
+
+_target_reported = False
+
+
+def report_aws_target(model_id: str | None = None) -> None:
+    """Print, once per process, the region and model this run will use.
+
+    Shown before any agent output so "which model was I on?" is never a
+    guess and a region mismatch is visible before the first Bedrock call.
+    Also warns when the shell's ``AWS_REGION`` overrode the value in ``.env``,
+    the one case where the file a user just edited is not what takes effect.
+    """
+    global _target_reported
+    if _target_reported:
+        return
+    _target_reported = True
+
+    region = get_region()
+    line = f"[aws] region={region}"
+    if model_id:
+        line += f"  model={model_id}"
+    print(line)
+
+    wanted = dotenv_values(ENV_PATH) if ENV_PATH.exists() else {}
+    if wanted.get("AWS_REGION") and wanted["AWS_REGION"] != region:
+        print(
+            f"[aws] note: .env sets AWS_REGION={wanted['AWS_REGION']} but the shell's "
+            f"AWS_REGION won. Unset it to use the .env value."
+        )
 
 
 @functools.lru_cache(maxsize=1)
@@ -117,6 +149,14 @@ def get_model(**kwargs) -> BedrockModel:
 
     Any keyword arguments (``temperature``, ``max_tokens``, ``region_name``,
     or an explicit ``model_id`` override) are passed through to BedrockModel.
+
+    ``region_name`` defaults to :func:`get_region`. BedrockModel on its own
+    prefers the profile's configured region over ``AWS_REGION``, so without
+    this the model discovery (which uses get_region) and the actual Bedrock
+    calls could land in two different regions.
     """
     kwargs.setdefault("model_id", resolve_model_id())
+    if "boto_session" not in kwargs:
+        kwargs.setdefault("region_name", get_region())
+    report_aws_target(kwargs["model_id"])
     return BedrockModel(**kwargs)
