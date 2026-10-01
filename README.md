@@ -36,6 +36,8 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env: set AWS_PROFILE and AWS_REGION. Optionally pin a model with STRANDS_MODEL_ID.
 
+> Note: only run the following scripts against one example at a time. Just pointing to the entire directory may cause the agent to fail due to limitations placed on max_tokens. You can edit this parameter to increase the agents call and response capabilities
+
 # Run any of the coding agents
 python code_generator.py     # generate code from a description
 python code_reviewer.py      # review code for bugs and security
