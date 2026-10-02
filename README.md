@@ -121,7 +121,7 @@ The agent degrades gracefully: without the tools package it still helps with pas
 - [Companion blog post: Coding Agents](Coding%20Agents%20-%20From%20Autocomplete%20to%20Autonomous%20Software%20Work.md)
 - [AWS Prescriptive Guidance - Coding agents](https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-patterns/coding-agents.html)
 - [Amazon Q Developer](https://aws.amazon.com/q/developer/)
-- [Strands community tools package](https://strandsagents.com/docs/user-guide/concepts/tools/community-tools-package/)
+- [Strands community tools package](https://strandsagents.com/docs/user-guide/sdk/tools/community-tools-package/)
 - [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
 
 ### The series
